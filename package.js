@@ -1,7 +1,7 @@
 Package.describe({
   name: 'sahina:flatui',
   summary: 'flat ui theme',
-  version: '1.3.1-2',
+  version: '1.3.2',
   git: 'https://github.com/sahina/flatui.git'
 });
 
