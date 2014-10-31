@@ -2,7 +2,7 @@ Package.describe({
   name: 'sahina:flatui',
   summary: 'flat ui theme',
   version: '1.3.1',
-  git: 'https://github.com/sahina/flatui'
+  git: 'https://github.com/sahina/flatui.git'
 });
 
 Package.onUse(function(api) {
