@@ -1,72 +1,59 @@
 Package.describe({
   name: 'sahina:flatui',
   summary: 'flat ui theme',
-  version: '1.3.4',
-  git: 'https://github.com/sahina/flatui.git'
+  version: '1.3.4'
 });
 
 Package.onUse(function(api) {
   api.versionsFrom('1.0');
 
-  // css files
-  api.addFiles([
-    'dist/css/vendor/bootstrap.min.css',
-    'dist/css/flat-ui-pro.css'
-  ], 'client');
+  var path = Npm.require('path');
+  var assetPath = path.join('dist/');
 
-  //fonts
-  var fonts = getFilesFromFolder('sahina:flatui', 'fonts');
-  api.addFiles(fonts, 'client');
+  var assets = [
+    
+    // fonts - glyphs
+    assetPath + 'fonts/glyphicons/flat-ui-pro-icons-regular.eot',
+    assetPath + 'fonts/glyphicons/flat-ui-pro-icons-regular.svg',
+    assetPath + 'fonts/glyphicons/flat-ui-pro-icons-regular.ttf',
+    assetPath + 'fonts/glyphicons/flat-ui-pro-icons-regular.woff',
+    assetPath + 'fonts/glyphicons/selection.json',
+    
+    // fonts - lato
+    assetPath + 'fonts/lato/lato-black.eot',
+    assetPath + 'fonts/lato/lato-black.svg',
+    assetPath + 'fonts/lato/lato-black.ttf',
+    assetPath + 'fonts/lato/lato-black.woff',
+    assetPath + 'fonts/lato/lato-bold.eot',
+    assetPath + 'fonts/lato/lato-bold.svg',
+    assetPath + 'fonts/lato/lato-bold.ttf',
+    assetPath + 'fonts/lato/lato-bold.woff',
+    assetPath + 'fonts/lato/lato-bolditalic.eot',
+    assetPath + 'fonts/lato/lato-bolditalic.svg',
+    assetPath + 'fonts/lato/lato-bolditalic.ttf',
+    assetPath + 'fonts/lato/lato-bolditalic.woff',
+    assetPath + 'fonts/lato/lato-italic.eot',
+    assetPath + 'fonts/lato/lato-italic.svg',
+    assetPath + 'fonts/lato/lato-italic.ttf',
+    assetPath + 'fonts/lato/lato-italic.woff',
+    assetPath + 'fonts/lato/lato-light.eot',
+    assetPath + 'fonts/lato/lato-light.svg',
+    assetPath + 'fonts/lato/lato-light.ttf',
+    assetPath + 'fonts/lato/lato-light.woff',
+    assetPath + 'fonts/lato/lato-regular.eot',
+    assetPath + 'fonts/lato/lato-regular.svg',
+    assetPath + 'fonts/lato/lato-regular.ttf',
+    assetPath + 'fonts/lato/lato-regular.woff',
 
-  //icons
-  var icons = getFilesFromFolder('sahina:flatui', 'Icons');
-  api.addFiles(icons, 'client');
+    // css
+    assetPath + 'css/vendor/bootstrap.min.css',
+    assetPath + 'css/flat-ui-pro.css',
 
-  //glyphs
-  var glyphs = getFilesFromFolder('sahina:flatui', 'Glyphs');
-  api.addFiles(glyphs, 'client');
+    // js
+    assetPath + 'js/vendor/jquery.min.js',    
+    assetPath + 'js/flat-ui-pro.js'
 
-  // js
-  api.addFiles([
-    'dist/js/vendor/jquery.min.js',
-    'dist/js/flat-ui-pro.js'
-  ], 'client');
+  ];
 
+  api.addFiles(assets, 'client');
 });
-
-function getFilesFromFolder(packageName, folder) {
-  // local imports
-  var _ = Npm.require("underscore");
-  var fs = Npm.require("fs");
-  var path = Npm.require("path");
-  // helper function, walks recursively inside nested folders and return absolute filenames
-  function walk(folder) {
-    var filenames = [];
-    // get relative filenames from folder
-    var folderContent = fs.readdirSync(folder);
-    // iterate over the folder content to handle nested folders
-    _.each(folderContent, function(filename) {
-      // build absolute filename
-      var absoluteFilename = folder + path.sep + filename;
-      // get file stats
-      var stat = fs.statSync(absoluteFilename);
-      if (stat.isDirectory()) {
-        // directory case => add filenames fetched from recursive call
-        filenames = filenames.concat(walk(absoluteFilename));
-      } else {
-        // file case => simply add it
-        filenames.push(absoluteFilename);
-      }
-    });
-    return filenames;
-  }
-  // save current working directory (something like "/home/user/projects/my-project")
-  var cwd = process.cwd();
-  // chdir to our package directory
-  process.chdir("packages" + path.sep + packageName);
-  // launch initial walk
-  var result = walk(folder);
-  // restore previous cwd
-  process.chdir(cwd);
-  return result;
-}
