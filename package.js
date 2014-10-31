@@ -1,14 +1,12 @@
 Package.describe({
   name: 'sahina:flatui',
   summary: 'flat ui theme',
-  version: '1.3.2',
+  version: '1.3.3',
   git: 'https://github.com/sahina/flatui.git'
 });
 
 Package.onUse(function(api) {
   api.versionsFrom('1.0');
-
-  api.use(['jquery'], 'client');
 
   // css files
   api.addFiles([
@@ -16,8 +14,21 @@ Package.onUse(function(api) {
     'dist/css/flat-ui-pro.css'
   ], 'client');
 
+  //fonts
+  var fonts = getFilesFromFolder('sahina:flatui', 'fonts');
+  api.addFiles(fonts, 'client');
+
+  //icons
+  var icons = getFilesFromFolder('sahina:flatui', 'Icons');
+  api.addFiles(icons, 'client');
+
+  //glyphs
+  var glyphs = getFilesFromFolder('sahina:flatui', 'Glyphs');
+  api.addFiles(glyphs, 'client');
+
   // js
   api.addFiles([
+    'dist/js/vendor/jquery.min.js',
     'dist/js/flat-ui-pro.js'
   ], 'client');
 
