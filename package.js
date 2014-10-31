@@ -18,8 +18,6 @@ Package.onUse(function(api) {
 
   // js
   api.addFiles([
-    'dist/js/vendor/html5shiv.js',
-    'dist/js/vendor/respond.min.js',
     'dist/js/flat-ui-pro.js'
   ], 'client');
 
