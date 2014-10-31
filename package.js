@@ -1,6 +1,6 @@
 Package.describe({
   name: 'sahina:flatui',
-  summary: 'https://designmodo.com/my-account/downloads/',
+  summary: 'flat ui theme',
   version: '1.3.1'
 });
 
@@ -14,10 +14,6 @@ Package.onUse(function(api) {
     'dist/css/vendor/bootstrap.min.css',
     'dist/css/flat-ui-pro.css'
   ], 'client');
-
-  // fonts
-  // var fonts = getFilesFromFolder('sahina:flatui', 'dist/fonts');
-  // api.addFiles(fonts, 'client');
 
   // js
   api.addFiles([
